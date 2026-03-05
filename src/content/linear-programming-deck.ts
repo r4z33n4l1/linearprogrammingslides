@@ -102,7 +102,7 @@ export const presentationMeta = {
   title: "Linear Programming: The Geometry of Optimal Decisions",
   course: "MAT392",
   duration: "~15 minutes",
-  totalSlides: 13,
+  totalSlides: 14,
 };
 
 /* ── Slide content ── */
@@ -339,8 +339,29 @@ export const slides: Slide[] = [
     },
   },
   {
-    id: "the-big-picture",
+    id: "duality",
     number: 13,
+    data: {
+      template: "content-visual",
+      title: "A Glimpse of Duality",
+      bullets: [
+        { text: "Every LP (the primal) has a mirror LP (the dual).", step: 1 },
+        { text: "Primal maximizes \u2192 Dual minimizes. Costs and constraints swap roles.", step: 2 },
+        { text: "The recipe: transpose A, swap c and b, flip \u2264 to \u2265.", step: 3 },
+        { text: "Weak duality: dual value \u2265 primal value (always an upper bound).", step: 4 },
+        {
+          text: "Strong duality: at the optimum, both are equal. max z* = min w* = $115.",
+          bold: true,
+          step: 5,
+        },
+        { text: "Why care? The dual proves your answer is optimal \u2014 a certificate of optimality.", step: 6 },
+      ],
+      visualId: "duality",
+    },
+  },
+  {
+    id: "the-big-picture",
+    number: 14,
     data: {
       template: "content-visual",
       title: "The Big Picture",

@@ -12,6 +12,7 @@ import { HalfspaceVisual } from "./halfspace-visual";
 import { ConvexityHalfspaceVisual } from "./convexity-halfspace-visual";
 import { Simplex3DVisual } from "./simplex-3d-visual";
 import { BigPictureVisual } from "./big-picture-visual";
+import { DualityVisual } from "./duality-visual";
 
 const registry: Record<string, React.FC<{ revealStep?: number }>> = {
   "bakery-icon": BakeryIconVisual,
@@ -28,6 +29,7 @@ const registry: Record<string, React.FC<{ revealStep?: number }>> = {
   "convexity-halfspace": ConvexityHalfspaceVisual,
   "simplex-3d": Simplex3DVisual,
   "big-picture": BigPictureVisual,
+  duality: DualityVisual,
 };
 
 export function SlideVisual({ id, revealStep }: { id: string; revealStep?: number }) {

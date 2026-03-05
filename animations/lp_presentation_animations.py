@@ -547,3 +547,170 @@ class SimplexWalk3D(ThreeDScene):
         )
         self.wait(3.5)
         self.stop_ambient_camera_rotation()
+
+
+class DualityAnimation(LPScene):
+    """Primal morphs into Dual: max→min, b→objective, c→RHS, A→Aᵀ."""
+
+    def construct(self):
+        # ── PRIMAL (separate pieces for animation) ──
+        p_lbl = Text("Primal", font_size=30, color=TEAL_STROKE, weight=BOLD)
+
+        p_max = Text("max", font_size=26, color=GOLD, weight=BOLD)
+        p_obj = Text("3x + 4y", font_size=26, color=TEAL_STROKE)
+        p_row0 = VGroup(p_max, p_obj).arrange(RIGHT, buff=0.18)
+
+        p_c1_lhs = Text("2x + 3y", font_size=21, color=ORANGE_LINE)
+        p_c1_ineq = Text("\u2264", font_size=21, color=BLACK)
+        p_c1_rhs = Text("100", font_size=21, color=RED_LINE, weight=BOLD)
+        p_c1 = VGroup(p_c1_lhs, p_c1_ineq, p_c1_rhs).arrange(RIGHT, buff=0.12)
+
+        p_c2_lhs = Text("x + 2y", font_size=21, color=BLUE_LINE)
+        p_c2_ineq = Text("\u2264", font_size=21, color=BLACK)
+        p_c2_rhs = Text("50", font_size=21, color=RED_LINE, weight=BOLD)
+        p_c2 = VGroup(p_c2_lhs, p_c2_ineq, p_c2_rhs).arrange(RIGHT, buff=0.12)
+
+        p_c3_lhs = Text("3x + 2y", font_size=21, color=GREEN_LINE)
+        p_c3_ineq = Text("\u2264", font_size=21, color=BLACK)
+        p_c3_rhs = Text("80", font_size=21, color=RED_LINE, weight=BOLD)
+        p_c3 = VGroup(p_c3_lhs, p_c3_ineq, p_c3_rhs).arrange(RIGHT, buff=0.12)
+
+        p_nn = Text("x, y \u2265 0", font_size=21, color=DARK_GRAY)
+
+        p_body = VGroup(p_row0, p_c1, p_c2, p_c3, p_nn).arrange(
+            DOWN, buff=0.26, aligned_edge=LEFT
+        )
+        p_lbl.next_to(p_body, UP, buff=0.35)
+        p_box = SurroundingRectangle(
+            VGroup(p_lbl, p_body), color=TEAL_STROKE, buff=0.28,
+            corner_radius=0.12, stroke_width=2.5,
+        )
+        primal = VGroup(p_box, p_lbl, p_body)
+
+        # ── DUAL (target positions, revealed step by step) ──
+        d_lbl = Text("Dual", font_size=30, color=RED_LINE, weight=BOLD)
+
+        d_min = Text("min", font_size=26, color=GOLD, weight=BOLD)
+        d_obj = Text("100\u03bb\u2081 + 50\u03bb\u2082 + 80\u03bb\u2083", font_size=22, color=RED_LINE)
+        d_row0 = VGroup(d_min, d_obj).arrange(RIGHT, buff=0.18)
+
+        d_dc1 = Text("2\u03bb\u2081 +  \u03bb\u2082 + 3\u03bb\u2083  \u2265  3", font_size=21, color=ORANGE_LINE)
+        d_dc2 = Text("3\u03bb\u2081 + 2\u03bb\u2082 + 2\u03bb\u2083  \u2265  4", font_size=21, color=BLUE_LINE)
+        d_nn = Text("\u03bb\u2081, \u03bb\u2082, \u03bb\u2083 \u2265 0", font_size=21, color=DARK_GRAY)
+
+        d_body = VGroup(d_row0, d_dc1, d_dc2, d_nn).arrange(
+            DOWN, buff=0.26, aligned_edge=LEFT
+        )
+        d_lbl.next_to(d_body, UP, buff=0.35)
+        d_box = SurroundingRectangle(
+            VGroup(d_lbl, d_body), color=RED_LINE, buff=0.28,
+            corner_radius=0.12, stroke_width=2.5,
+        )
+        dual = VGroup(d_box, d_lbl, d_body)
+        dual.shift(RIGHT * 3.3 + DOWN * 0.15)
+
+        # Step labels helper
+        def slabel(txt, clr=DARK_GRAY):
+            return Text(txt, font_size=20, color=clr).to_edge(DOWN, buff=0.45)
+
+        # Strong duality result
+        strong = Text(
+            "Strong Duality:  max z* = min w*  =  $115",
+            font_size=24, color=TEAL_STROKE, weight=BOLD,
+        ).to_edge(DOWN, buff=0.4)
+
+        # ════════════════════════════════════════
+        # ANIMATE
+        # ════════════════════════════════════════
+
+        # Phase 1: Show primal centered
+        primal.move_to(ORIGIN + DOWN * 0.15)
+        self.play(FadeIn(primal), run_time=1.8)
+        self.wait(2.5)
+
+        # Phase 2: Slide primal left
+        self.play(primal.animate.shift(LEFT * 3.3), run_time=1.4)
+        self.wait(0.8)
+
+        # Dual label
+        self.play(FadeIn(d_lbl), run_time=0.6)
+        self.wait(0.4)
+
+        # ── Step 1: max → min ──
+        s1 = slabel("max  \u2192  min", GOLD)
+        hl = SurroundingRectangle(p_max, color=GOLD, buff=0.06, stroke_width=3)
+        self.play(Create(hl), FadeIn(s1), run_time=0.7)
+        self.wait(0.8)
+
+        max_ghost = p_max.copy()
+        self.play(FadeTransform(max_ghost, d_min), run_time=1.4)
+        self.play(FadeOut(hl), run_time=0.3)
+        self.wait(0.8)
+
+        # ── Step 2: b (RHS) becomes dual objective ──
+        s2 = slabel("b = (100, 50, 80)  \u2192  dual objective", RED_LINE)
+        hl1 = SurroundingRectangle(p_c1_rhs, color=RED_LINE, buff=0.06, stroke_width=3)
+        hl2 = SurroundingRectangle(p_c2_rhs, color=RED_LINE, buff=0.06, stroke_width=3)
+        hl3 = SurroundingRectangle(p_c3_rhs, color=RED_LINE, buff=0.06, stroke_width=3)
+        self.play(
+            FadeTransform(s1, s2),
+            Create(hl1), Create(hl2), Create(hl3),
+            run_time=0.8,
+        )
+        self.wait(1.0)
+
+        rhs_ghosts = VGroup(p_c1_rhs.copy(), p_c2_rhs.copy(), p_c3_rhs.copy())
+        self.play(FadeTransform(rhs_ghosts, d_obj), run_time=1.6)
+        self.play(FadeOut(hl1), FadeOut(hl2), FadeOut(hl3), run_time=0.3)
+        self.wait(0.8)
+
+        # ── Step 3: A\u1d40 — transpose constraints, c becomes RHS ──
+        s3 = slabel("A \u2192 A\u1d40,  c = (3, 4)  \u2192  dual RHS", ORANGE_LINE)
+        hl_lhs = SurroundingRectangle(
+            VGroup(p_c1_lhs, p_c2_lhs, p_c3_lhs), color=ORANGE_LINE,
+            buff=0.08, stroke_width=3,
+        )
+        hl_obj = SurroundingRectangle(p_obj, color=TEAL_STROKE, buff=0.06, stroke_width=3)
+        self.play(
+            FadeTransform(s2, s3),
+            Create(hl_lhs), Create(hl_obj),
+            run_time=0.8,
+        )
+        self.wait(1.0)
+
+        lhs_ghosts = VGroup(p_c1_lhs.copy(), p_c2_lhs.copy(), p_c3_lhs.copy())
+        obj_ghost = p_obj.copy()
+        self.play(
+            FadeTransform(lhs_ghosts, d_dc1),
+            run_time=1.6,
+        )
+        self.wait(0.4)
+        self.play(
+            FadeTransform(obj_ghost, d_dc2),
+            run_time=1.6,
+        )
+        self.play(FadeOut(hl_lhs), FadeOut(hl_obj), run_time=0.3)
+        self.wait(0.8)
+
+        # ── Step 4: \u2264 flips to \u2265, non-negativity ──
+        s4 = slabel("\u2264  \u2192  \u2265,  non-negativity carries over", DARK_GRAY)
+        hl_ineqs = VGroup(
+            SurroundingRectangle(p_c1_ineq, color=BLACK, buff=0.06, stroke_width=3),
+            SurroundingRectangle(p_c2_ineq, color=BLACK, buff=0.06, stroke_width=3),
+            SurroundingRectangle(p_c3_ineq, color=BLACK, buff=0.06, stroke_width=3),
+        )
+        self.play(FadeTransform(s3, s4), *[Create(h) for h in hl_ineqs], run_time=0.8)
+        self.wait(0.8)
+
+        nn_ghost = p_nn.copy()
+        self.play(FadeTransform(nn_ghost, d_nn), run_time=1.2)
+        self.play(*[FadeOut(h) for h in hl_ineqs], run_time=0.3)
+        self.wait(0.6)
+
+        # Dual box
+        self.play(Create(d_box), run_time=0.6)
+        self.wait(0.8)
+
+        # ── Strong duality ──
+        self.play(FadeTransform(s4, strong), run_time=1.0)
+        self.wait(3.5)

@@ -1,0 +1,234 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f7f0e1 0%, #f2e7d4 100%);
+  color: #1f2937;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Home page ── */
+
+.home {
+  width: min(1100px, calc(100vw - 48px));
+  margin: 0 auto;
+  padding: 48px 0 72px;
+  display: grid;
+  gap: 32px;
+}
+
+.panel {
+  border: 1px solid rgba(31, 41, 55, 0.08);
+  border-radius: 28px;
+  background: rgba(255, 252, 246, 0.88);
+  box-shadow: 0 28px 70px rgba(97, 77, 42, 0.12);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.heroCopy {
+  padding: 40px;
+  display: grid;
+  gap: 18px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #0f766e;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.heroBody {
+  margin: 0;
+  max-width: 52ch;
+  color: #475569;
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.metaGrid {
+  padding: 28px;
+  display: grid;
+  gap: 14px;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.08);
+}
+
+.metaLabel {
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+}
+
+.metaValue {
+  font-weight: 700;
+}
+
+.slideGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.slideCard {
+  padding: 24px;
+  display: grid;
+  gap: 10px;
+}
+
+.slideCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 18px;
+}
+
+.slideCardTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.slideCardNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: #ecfeff;
+  color: #0f766e;
+  font-family: "SFMono-Regular", "Menlo", "Monaco", monospace;
+  font-size: 0.88rem;
+}
+
+.cardText {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+/* ── Buttons (shared) ── */
+
+.primaryAction,
+.secondaryAction,
+.navButton,
+.navGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease;
+}
+
+.primaryAction,
+.navButton {
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #0f766e, #0369a1);
+  color: #f8fafc;
+  box-shadow: 0 18px 36px rgba(8, 47, 73, 0.18);
+}
+
+.secondaryAction,
+.navGhost {
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  background: rgba(255, 255, 255, 0.72);
+  color: #134e4a;
+}
+
+.primaryAction:hover,
+.secondaryAction:hover,
+.navButton:hover,
+.navGhost:hover {
+  transform: translateY(-1px);
+}
+
+.navButton:disabled,
+.navGhost:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+/* ── Player navigation ── */
+
+.progressTrack {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: rgba(15, 23, 42, 0.08);
+  z-index: 20;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #0f766e, #0369a1);
+  transition: width 300ms ease;
+}
+
+.navRow {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 800px) {
+  .hero,
+  .slideGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .navRow {
+    left: 16px;
+    right: 16px;
+    transform: none;
+    justify-content: space-between;
+  }
+}

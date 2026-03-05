@@ -1,0 +1,77 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  margin: 0;
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 700px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 750px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.equation {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: #0f766e;
+  white-space: nowrap;
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 40px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 1.2rem;
+}
+
+.annotation {
+  color: #475569;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  line-height: 1.5;
+}
+
+.footer {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}

@@ -1,0 +1,31 @@
+.frame {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(20, 184, 166, 0.06), transparent 40%),
+    radial-gradient(circle at 82% 86%, rgba(14, 165, 233, 0.05), transparent 40%),
+    linear-gradient(180deg, #f7f0e1 0%, #f2e7d4 100%);
+  color: #1f2937;
+}
+
+.inner {
+  width: min(1100px, calc(100vw - 80px));
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slideNumber {
+  position: absolute;
+  right: 28px;
+  bottom: 20px;
+  font-family: "SFMono-Regular", "Menlo", "Monaco", monospace;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}

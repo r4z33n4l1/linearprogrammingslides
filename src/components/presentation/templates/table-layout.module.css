@@ -1,0 +1,62 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  margin: 0;
+  color: #475569;
+  font-size: 1.05rem;
+}
+
+.table {
+  width: 100%;
+  max-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(31, 41, 55, 0.1);
+}
+
+.table th {
+  padding: 14px 20px;
+  background: #0f766e;
+  color: #f0fdfa;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+  letter-spacing: 0.04em;
+}
+
+.table td {
+  padding: 14px 20px;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.06);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.highlight td {
+  background: rgba(20, 184, 166, 0.12);
+  font-weight: 700;
+  color: #134e4a;
+}
+
+.footer {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-style: italic;
+}

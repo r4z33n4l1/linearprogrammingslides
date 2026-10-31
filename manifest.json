@@ -1,0 +1,97 @@
+{
+  "project": "r4z33n4l1/linearprogrammingslides",
+  "snapshot_date": "2026-10-31",
+  "repository": "r4z33n4l1/linearprogrammingslides",
+  "backups": [
+    {
+      "ref": "refs/tags/local-backup/2026-10-31/working-9b354549324f-7cbbc957",
+      "sha": "7cbbc957fe8d9496fbc7b753098aa6829d0864bc",
+      "kind": "snapshot",
+      "snapshot_id": "9b354549324f",
+      "source_ref": null,
+      "stash_index": null,
+      "verified": true
+    }
+  ],
+  "snapshots": [
+    {
+      "id": "9b354549324f",
+      "kind": "working",
+      "source_sha": "25b8a1617f7a7ef930e30109f3149e19c04dc9d0",
+      "commit": "7cbbc957fe8d9496fbc7b753098aa6829d0864bc",
+      "included_files": 127,
+      "bytes": 13142379,
+      "excluded": [],
+      "secret_findings": [],
+      "saved_ref": "refs/tags/local-backup/2026-10-31/working-9b354549324f-7cbbc957"
+    }
+  ],
+  "local_checkouts": [
+    {
+      "branch": "main",
+      "source_commit": "25b8a1617f7a7ef930e30109f3149e19c04dc9d0",
+      "source_branch_state": "identical",
+      "file_status_verified": true,
+      "changes": [
+        {
+          "code": "??",
+          "path": "screenshots/slide-01.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-02.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-03.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-04.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-05.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-06.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-07.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-08.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-09.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-10.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-11.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-12.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-13.png"
+        },
+        {
+          "code": "??",
+          "path": "screenshots/slide-14.png"
+        }
+      ]
+    }
+  ],
+  "history_withheld": [],
+  "history_bundle": null
+}
